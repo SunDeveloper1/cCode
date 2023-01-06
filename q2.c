@@ -6,6 +6,22 @@ struct Product{
     float Price;
 };
 
+struct BillDetails{
+    int discount;
+    float grandTotal;
+    float discountedValue;
+};
+struct BillDetails bill;
+
+struct BillDetails BillCalaculator(float total){
+    if(total>=1000 && total<=2500){
+        bill.discount=5;
+        bill.discountedValue=0.05*total;
+        bill.grandTotal=total-bill.discountedValue;
+        return bill;
+    }
+    
+}
 void ScanProducts(int n){
     static struct Product *pointer[10];
     int i=0;
@@ -26,12 +42,19 @@ void ScanProducts(int n){
          
         
     }
+    float total=0.00;
    printf("             *****  Vivek Store ***** \n");
-   printf("S.No.|    NAME     |  QUANTITY   |  PRICE \n");
-   for (i = 0; i < 2; i++)
-        printf("%d  |   %-15s   |     %-d   |       %-5f   \n", i + 1, pointer[i]->Item, pointer[i]->Quantity, 
-        pointer[i]->Price );
-     printf("--------------------------------------------------------------\n");        
+   printf("Item |    QUANTITY |  PRICE | Sub-Total  \n");
+   for (i = 0; i < 2; i++){
+        printf("%s  |   %-15d   |     %-f   |       %-5f   \n", pointer[i]->Item, pointer[i]->Quantity, 
+        pointer[i]->Price ,pointer[i]->Quantity*pointer[i]->Price);
+        total+=pointer[i]->Quantity*pointer[i]->Price;
+   }
+   printf("The Total Price %.2lf", total);
+   printf("discount value %d", BillCalaculator(total).discount);
+     printf("--------------------------------------------------------------\n");  
+     
+    
 
    
     
